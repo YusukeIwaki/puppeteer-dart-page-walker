@@ -1,0 +1,7 @@
+name: puppeteer_page_walker
+
+dependencies:
+  puppeteer: ^1.14.1
+
+dev_dependencies:
+  pedantic: ^1.8.0
