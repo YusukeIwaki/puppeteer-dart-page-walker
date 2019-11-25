@@ -6,7 +6,7 @@ A wrapper library of [puppeteer](https://pub.dev/packages/puppeteer) for humane 
 
 Just add dependency into pubspec.yaml.
 
-```
+```yml
 dependencies:
   puppeteer_page_walker:
     git:
@@ -16,7 +16,7 @@ dependencies:
 ## Enjoy!
 
 
-```
+```dart
 import 'dart:io';
 
 import 'package:puppeteer/puppeteer.dart';
