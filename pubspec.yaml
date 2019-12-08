@@ -1,6 +1,6 @@
 name: puppeteer_page_walker
-description: A wrapper library of puppeteer for humane scraping.
-version: 0.1.0
+description: A wrapper library of puppeteer for humane scraping. Let's write the scraping scenario separately for each browsing URL.
+version: 0.1.0+1
 author: YusukeIwaki
 homepage: https://github.com/YusukeIwaki/puppeteer-dart-page-walker
 repository: https://github.com/YusukeIwaki/puppeteer-dart-page-walker

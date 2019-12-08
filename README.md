@@ -1,10 +1,20 @@
+[![Pub](https://img.shields.io/pub/v/puppeteer_page_walker)](https://pub.dev/packages/puppeteer_page_walker)
+
 # puppeteer-page-walker
 
 A wrapper library of [puppeteer](https://pub.dev/packages/puppeteer) for humane scraping :)
+Let's write the scraping scenario separately for each browsing URL.
 
 ## Install
 
-Just add dependency into pubspec.yaml.
+Just add dependency into pubspec.yaml,
+
+```yml
+dependencies:
+  puppeteer_page_walker: ^0.1.0
+```
+
+or specify the github url for using the latest functions.
 
 ```yml
 dependencies:
