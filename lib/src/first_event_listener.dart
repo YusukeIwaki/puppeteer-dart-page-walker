@@ -10,10 +10,10 @@ import 'dart:async';
 // Some firstSome = await firstEventListener.firstEvent; // get the first Event from `.reset()` call or wait for it.
 //
 class FirstEventListener<Event> {
-  Event _firstEvent;
-  Completer<Event> _firstEventCompleter;
+  Event? _firstEvent;
+  Completer<Event>? _firstEventCompleter;
 
-  reset() {
+  void reset() {
     _firstEvent = null;
   }
 
@@ -22,21 +22,17 @@ class FirstEventListener<Event> {
       return Future.value(_firstEvent);
     }
 
-    if (_firstEventCompleter == null) {
-      _firstEventCompleter = Completer<Event>();
-    }
-    return _firstEventCompleter.future;
+    _firstEventCompleter ??= Completer<Event>();
+    return _firstEventCompleter!.future;
   }
 
-  update(Event event) {
+  void update(Event event) {
     if (_firstEvent != null) {
       return;
     }
 
     _firstEvent = event;
-    if (_firstEventCompleter != null) {
-      _firstEventCompleter.complete(event);
-      _firstEventCompleter = null;
-    }
+    _firstEventCompleter?.complete(event);
+    _firstEventCompleter = null;
   }
 }

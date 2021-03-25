@@ -41,7 +41,7 @@ main(List<String> args) async {
   }).andIf((url) => url.startsWith("https://github.com/search"), (page) async {
     // extract repo title from search results.
     final repoList = await page.$("ul.repo-list");
-    final repoItems = await repoList.$$("h3");
+    final repoItems = await repoList.$$("div.f4");
     await Future.forEach(repoItems, (item) async {
       final String title = await item.$eval("a", "a => a.innerText");
       print("==> $title");

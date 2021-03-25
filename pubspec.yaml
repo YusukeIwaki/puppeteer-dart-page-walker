@@ -1,15 +1,15 @@
 name: puppeteer_page_walker
 description: A wrapper library of puppeteer for humane scraping.
-version: 0.1.0
+version: 0.2.0
 author: YusukeIwaki
 homepage: https://github.com/YusukeIwaki/puppeteer-dart-page-walker
 repository: https://github.com/YusukeIwaki/puppeteer-dart-page-walker
 
 environment:
-  sdk: ">=2.6.0-dev.6.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  puppeteer: ^1.14.1
+  puppeteer: ^2.0.0
 
 dev_dependencies:
-  pedantic: ^1.8.0
+  pedantic: ^1.11.0

@@ -10,10 +10,10 @@ import './throttled_value.dart';
 
 class PageWalker {
   final Browser _puppeteerBrowser;
-  PageHandler _initialPageHandler;
-  final _handlers = List<InternalPageHandler>();
+  late PageHandler _initialPageHandler;
+  final _handlers = <InternalPageHandler>[];
   final _lastUrl = ThrottledValue<String>();
-  LastEventListener<Target> _lastTargetListener;
+  late LastEventListener<Target> _lastTargetListener;
 
   PageWalker(Browser browser) : _puppeteerBrowser = browser;
 
@@ -31,13 +31,13 @@ class PageWalker {
   }
 
   PageWalker andIf(UrlPredicate urlFilter, PageHandler pageHandler) {
-    this._handlers.add(InternalPageHandler(urlFilter, pageHandler));
+    _handlers.add(InternalPageHandler(urlFilter, pageHandler));
     return this;
   }
 
   Future<void> startWalking() async {
     _lastTargetListener = LastEventListener<Target>();
-    final targetChangeSubscriptions = List<StreamSubscription>();
+    final targetChangeSubscriptions = <StreamSubscription>[];
     targetChangeSubscriptions.add(
         _puppeteerBrowser.onTargetCreated.listen(_lastTargetListener.update));
     targetChangeSubscriptions.add(
@@ -50,7 +50,7 @@ class PageWalker {
     _lastTargetListener.reset();
     await _initialPageHandler(page);
     while (_puppeteerBrowser.isConnected) {
-      Target lastTarget = await _lastTargetListener.lastEvent;
+      final lastTarget = await _lastTargetListener.lastEvent;
       _lastTargetListener.reset();
       await _handleTargetAsync(lastTarget);
     }
@@ -58,11 +58,9 @@ class PageWalker {
   }
 
   Future<void> _handleTargetAsync(Target target) async {
-    final Page page = await target.page;
-    final String url = target.url;
-    if (url != null && page != null) {
-      await _handlePageAsync(url, page);
-    }
+    final page = await target.page;
+    final url = target.url;
+    await _handlePageAsync(url, page);
   }
 
   Future<void> _handlePageAsync(String url, Page page) async {
@@ -74,6 +72,7 @@ class PageWalker {
     if (handlersForUrl.isEmpty) return;
 
     await DomContentLoadedWaiter(page).waitForDomContentLoaded();
-    await Future.forEach(handlersForUrl, (h) => h.pageHandler(page));
+    await Future.forEach(
+        handlersForUrl, (InternalPageHandler h) => h.pageHandler(page));
   }
 }

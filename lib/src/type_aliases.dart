@@ -5,7 +5,7 @@ import 'package:puppeteer/puppeteer.dart';
 // examples:
 //   (url) => url == "https://www.google.com/"
 //   (url) => url.endsWith(".png")
-typedef bool UrlPredicate(String url);
+typedef UrlPredicate = bool Function(String url);
 
 // Represents the operation for specific url.
 //
@@ -15,4 +15,4 @@ typedef bool UrlPredicate(String url);
 //      await page.type("#password", "hogehoge");
 //      await page.click("input[type='submit']");
 //    }
-typedef Future<void> PageHandler(Page page);
+typedef PageHandler = Future<void> Function(Page page);

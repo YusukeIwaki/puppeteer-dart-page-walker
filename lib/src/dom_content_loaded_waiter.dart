@@ -10,12 +10,11 @@ class DomContentLoadedWaiter {
 
   Future<bool> get isDomContentLoaded async {
     try {
-      final String readyState =
-          await page.evaluate("() => document.readyState");
-      return readyState == "interactive" || readyState == "complete";
+      final readyState = await page.evaluate('() => document.readyState');
+      return readyState == 'interactive' || readyState == 'complete';
     } catch (err) {
       if (err.toString() ==
-          "Execution context was destroyed, most likely because of a navigation.") {
+          'Execution context was destroyed, most likely because of a navigation.') {
         return false;
       }
       rethrow;
